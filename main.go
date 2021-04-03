@@ -30,13 +30,13 @@ func main() {
 
 	emailClient := email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
 
-	// Configure router
-	app := fiber.New()
-
 	services := map[string]common.NotificationService{
 		"discord": discordClient,
 		"email":   emailClient,
 	}
+
+	// Configure router
+	app := fiber.New()
 
 	for serviceName, service := range services {
 		router := app.Group("/" + serviceName)
