@@ -6,7 +6,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/bwmarrin/discordgo"
+	"github.com/Universalis-FFXIV/alerts/service/discord"
+	"github.com/Universalis-FFXIV/alerts/service/email"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -18,23 +19,14 @@ func main() {
 	port := flag.Uint64("p", 7584, "service binding port")
 	flag.Parse()
 
-	discord, err := discordgo.New("Bot " + os.Getenv("UNIVERSALIS_ALERTS_DISCORD_TOKEN"))
+	_, err := discord.New(os.Getenv("UNIVERSALIS_ALERTS_DISCORD_TOKEN"))
 	if err != nil {
 		log.Fatalln(err)
 	}
 
+	_ = email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
+
 	app := fiber.New()
-
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		user, err := discord.User("@me")
-		if err != nil {
-			log.Fatalln(err)
-		}
-
-		res := &GenericResponse{Message: "Logged in as " + user.Username + "#" + user.Discriminator}
-
-		return ctx.JSON(res)
-	})
 
 	app.Listen(":" + strconv.FormatUint(*port, 10))
 }
