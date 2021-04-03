@@ -1,18 +1,15 @@
 package discord
 
 import (
+	"github.com/Universalis-FFXIV/alerts/service/common"
 	"github.com/bwmarrin/discordgo"
 )
-
-type Discord interface {
-	SendNotification(uid uint64, text string) error
-}
 
 type DiscordService struct {
 	client *discordgo.Session
 }
 
-func New(token string) (Discord, error) {
+func New(token string) (common.NotificationService, error) {
 	client, err := discordgo.New("Bot " + token)
 	if err != nil {
 		return nil, err
@@ -22,6 +19,7 @@ func New(token string) (Discord, error) {
 	return d, nil
 }
 
-func (d *DiscordService) SendNotification(uid uint64, text string) error {
-	return nil
+func (d *DiscordService) SendNotification(uid string, text string) error {
+	_, err := d.client.ChannelMessageSend(uid, text)
+	return err
 }

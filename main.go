@@ -13,7 +13,7 @@ import (
 )
 
 type DiscordNotificationInfo struct {
-	UserID uint64 `json:"uid"`
+	UserID string `json:"uid"`
 	Body   string `json:"body"`
 }
 
