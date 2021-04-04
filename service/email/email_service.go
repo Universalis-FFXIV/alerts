@@ -23,7 +23,9 @@ func (e *EmailService) SendNotification(address string, notification *model.Noti
 	sender := "notifications@universalis.app"
 	subject := "Alert triggered for " + notification.ItemName
 
-	message := e.client.NewMessage(sender, subject, notification.Body, address)
+	body := notification.Body + "\n\n<p>Your alert for " + notification.ItemName + " has been triggered.\nYou can view the item page on Universalis by clicking <a href=\"" + notification.PageURL + "\">this link</a>.</p>"
+
+	message := e.client.NewMessage(sender, subject, body, address)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
