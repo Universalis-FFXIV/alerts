@@ -3,6 +3,7 @@ package discord
 import (
 	"bytes"
 	_ "embed"
+	"math"
 	"text/template"
 
 	"github.com/Universalis-FFXIV/alerts/model"
@@ -39,11 +40,26 @@ func New(token string) (common.NotificationService, error) {
 	return d, nil
 }
 
+type embedBody struct {
+	*model.Notification
+	TrimmedReasons []string
+	TrimmedCount   int
+	Trimmed        bool
+}
+
 func (d *discordService) SendNotification(uid string, notification *model.Notification) error {
 	user, _ := d.client.UserChannelCreate(uid)
 
+	// Trim down the sent reasons since Discord embeds have a limit on size
+	eb := &embedBody{
+		Notification:   notification,
+		TrimmedReasons: notification.Reasons[:int(math.Min(14, float64(len(notification.Reasons))))],
+	}
+	eb.TrimmedCount = len(notification.Reasons) - len(eb.TrimmedReasons)
+	eb.Trimmed = eb.TrimmedCount != 0
+
 	var description bytes.Buffer
-	err := d.et.Execute(&description, notification)
+	err := d.et.Execute(&description, eb)
 	if err != nil {
 		return err
 	}

@@ -21,7 +21,24 @@ func TestSend(t *testing.T) {
 		Notification: model.Notification{
 			ItemName: "Purpure Bead",
 			PageURL:  "https://universalis.app/market/29959",
-			Reasons:  []string{"Prices_PricePerUnit < 9000", "History_Added"},
+			Reasons: []string{
+				"Prices_PricePerUnit < 9000",
+				"History_Added",
+				"History_IsHQ = true",
+				"Prices_TownID = 4",
+				"Prices_PricePerUnit < 9000",
+				"History_Added",
+				"History_IsHQ = true",
+				"Prices_TownID = 4",
+				"Prices_PricePerUnit < 9000",
+				"History_Added",
+				"History_IsHQ = true",
+				"Prices_TownID = 4",
+				"Prices_PricePerUnit < 9000",
+				"History_Added",
+				"History_IsHQ = true",
+				"Prices_TownID = 4",
+			},
 		},
 	}
 
