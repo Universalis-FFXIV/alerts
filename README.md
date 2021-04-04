@@ -20,7 +20,7 @@ Sends a notification over Discord.
 Sends a notification over email.
 
 #### Notification payload
-```
+```json
 {
     "targetUser": string,
     "notification": {
