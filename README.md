@@ -31,3 +31,6 @@ Sends a notification over email.
     }
 }
 ```
+
+## Testing environment variables
+*   `UNIALERTS_TEST_DISCORD_ID` - The Discord account to which the test notification will be sent.
