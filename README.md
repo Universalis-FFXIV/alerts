@@ -10,7 +10,11 @@ Alerts service for mogboard.
 *   Discord
 
 ## Setup
-Set the environment variable `UNIVERSALIS_MAILGUN_KEY` to your Mailgun API key, and the environment variable `UNIVERSALIS_ALERTS_DISCORD_TOKEN` to your Discord bot token.
+
+### Environment variables
+*   `UNIVERSALIS_MAILGUN_KEY` - Your Mailgun API key
+*   `UNIVERSALIS_ALERTS_DISCORD_TOKEN` - Your Discord bot token
+*   `UNIVERSALIS_ALERTS_EMAIL_ADDRESS` - Your notifications email address
 
 ## Endpoints
 

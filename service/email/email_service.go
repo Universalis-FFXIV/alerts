@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	_ "embed"
+	"os"
 	"text/template"
 	"time"
 
@@ -16,8 +17,9 @@ import (
 var emailTemplate string
 
 type emailService struct {
-	client *mailgun.MailgunImpl
-	et     *template.Template
+	client        *mailgun.MailgunImpl
+	et            *template.Template
+	senderAddress string
 }
 
 // New creates a new Mailgun-backed NotificationService.
@@ -29,13 +31,16 @@ func New(domain string, key string) (common.NotificationService, error) {
 		return nil, err
 	}
 
-	email := &emailService{client: client, et: et}
+	email := &emailService{
+		client:        client,
+		et:            et,
+		senderAddress: os.Getenv("UNIVERSALIS_ALERTS_EMAIL_ADDRESS"),
+	}
 
 	return email, nil
 }
 
 func (e *emailService) SendNotification(address string, notification *model.Notification) error {
-	sender := "notifications@universalis.app"
 	subject := "Alert triggered for " + notification.ItemName
 
 	var body bytes.Buffer
@@ -44,7 +49,7 @@ func (e *emailService) SendNotification(address string, notification *model.Noti
 		return err
 	}
 
-	message := e.client.NewMessage(sender, subject, body.String(), address)
+	message := e.client.NewMessage(e.senderAddress, subject, body.String(), address)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
