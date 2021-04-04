@@ -28,7 +28,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	//emailClient := email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
+	/*
+		emailClient, err := email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
+		if err != nil {
+			log.Fatalln(err)
+		}
+	*/
 
 	services := map[string]common.NotificationService{
 		"discord": discordClient,
