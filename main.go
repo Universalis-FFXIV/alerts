@@ -43,11 +43,19 @@ func main() {
 		router.Post("/send", func(ctx *fiber.Ctx) error {
 			ni := &model.NotificationInfo{}
 			if err := json.Unmarshal(ctx.Body(), ni); err != nil {
-				log.Println(err)
+				log.Println("JSON parsing failed; full error:", err)
 				return err
 			}
 
-			return service.SendNotification(ni.TargetUser, &ni.Notification)
+			err = service.SendNotification(ni.TargetUser, &ni.Notification)
+			if err != nil {
+				log.Println("Notification failed on", ctx.Route().Path, "to target", ni.TargetUser)
+				log.Println("Request body:", ni)
+				log.Println("Full error:", err)
+				return err
+			}
+
+			return nil
 		})
 	}
 
