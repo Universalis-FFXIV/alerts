@@ -29,3 +29,6 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+      env:
+        UNIALERTS_TEST_DISCORD_ID: ${{ secrets.UNIALERTS_TEST_DISCORD_ID }}
+        UNIVERSALIS_ALERTS_DISCORD_TOKEN: ${{ secrets.UNIVERSALIS_ALERTS_DISCORD_TOKEN }}
