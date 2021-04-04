@@ -7,14 +7,15 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/Universalis-FFXIV/alerts/model"
 	"github.com/Universalis-FFXIV/alerts/service/common"
 	"github.com/Universalis-FFXIV/alerts/service/discord"
 	"github.com/gofiber/fiber/v2"
 )
 
 type NotificationInfo struct {
-	TargetUser string `json:"targetUser"`
-	Body       string `json:"body"`
+	TargetUser   string             `json:"targetUser"`
+	Notification model.Notification `json:"notification"`
 }
 
 func main() {
@@ -46,7 +47,7 @@ func main() {
 				return err
 			}
 
-			return service.SendNotification(ni.TargetUser, ni.Body)
+			return service.SendNotification(ni.TargetUser, &ni.Notification)
 		})
 	}
 

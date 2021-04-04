@@ -1,6 +1,7 @@
 package discord
 
 import (
+	"github.com/Universalis-FFXIV/alerts/model"
 	"github.com/Universalis-FFXIV/alerts/service/common"
 	"github.com/bwmarrin/discordgo"
 )
@@ -24,8 +25,8 @@ func New(token string) (common.NotificationService, error) {
 	return d, nil
 }
 
-func (d *DiscordService) SendNotification(uid string, text string) error {
+func (d *DiscordService) SendNotification(uid string, notification *model.Notification) error {
 	user, _ := d.client.UserChannelCreate(uid)
-	_, err := d.client.ChannelMessageSend(user.ID, text)
+	_, err := d.client.ChannelMessageSend(user.ID, notification.Body)
 	return err
 }

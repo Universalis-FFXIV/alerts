@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/Universalis-FFXIV/alerts/model"
 	"github.com/Universalis-FFXIV/alerts/service/common"
 	"github.com/mailgun/mailgun-go/v4"
 )
@@ -18,11 +19,11 @@ func New(domain string, key string) common.NotificationService {
 	return email
 }
 
-func (e *EmailService) SendNotification(address string, text string) error {
+func (e *EmailService) SendNotification(address string, notification *model.Notification) error {
 	sender := "notifications@universalis.app"
-	subject := "Alert triggered on Universalis"
+	subject := "Alert triggered for " + notification.ItemName
 
-	message := e.client.NewMessage(sender, subject, text, address)
+	message := e.client.NewMessage(sender, subject, notification.Body, address)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
