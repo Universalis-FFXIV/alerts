@@ -27,6 +27,14 @@ func New(token string) (common.NotificationService, error) {
 
 func (d *DiscordService) SendNotification(uid string, notification *model.Notification) error {
 	user, _ := d.client.UserChannelCreate(uid)
-	_, err := d.client.ChannelMessageSend(user.ID, notification.Body)
+
+	embed := &discordgo.MessageEmbed{
+		URL:         notification.PageURL,
+		Title:       "Alert triggered for " + notification.ItemName,
+		Description: notification.Body,
+		Color:       0xBD983A,
+	}
+
+	_, err := d.client.ChannelMessageSendEmbed(user.ID, embed)
 	return err
 }
