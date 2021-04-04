@@ -1,7 +1,7 @@
 # alerts
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9ab1040a9f9c43faaed6cc46925db82d)](https://app.codacy.com/gh/Universalis-FFXIV/alerts?utm_source=github.com&utm_medium=referral&utm_content=Universalis-FFXIV/alerts&utm_campaign=Badge_Grade_Settings)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Universalis-FFXIV/alerts/Go)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Universalis-FFXIV/alerts/Go?label=build%20%26%20test)
 
 Alerts service for mogboard.
 
