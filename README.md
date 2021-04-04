@@ -20,13 +20,13 @@ Sends a notification over Discord.
 Sends a notification over email.
 
 #### Notification payload
-```json
+```ts
 {
-    "targetUser": string,
-    "notification": {
-        "itemName": string,
-        "pageUrl": string,
-        "reasons": string[]
+    targetUser: string,
+    notification: {
+        itemName: string,
+        pageUrl: string,
+        reasons: string[]
     }
 }
 ```
