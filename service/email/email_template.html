@@ -1,2 +1,7 @@
 <p>Your alert for {{.ItemName}} has been triggered.</p>
 <p>You can view the item page on Universalis by clicking <a href="{{.PageURL}}">this link</a>.</p>
+<br>
+<p>Notification reason(s):</p>
+<code>{{range .Reasons}}{{.}}
+{{end}}
+</code>

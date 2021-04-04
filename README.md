@@ -26,7 +26,7 @@ Sends a notification over email.
     "notification": {
         "itemName": string,
         "pageUrl": string,
-        "body": string
+        "reasons": string[]
     }
 }
 ```

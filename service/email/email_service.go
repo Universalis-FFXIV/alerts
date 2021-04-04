@@ -23,6 +23,7 @@ type emailService struct {
 // New creates a new Mailgun-backed NotificationService.
 func New(domain string, key string) (common.NotificationService, error) {
 	client := mailgun.NewMailgun(domain, key)
+
 	et, err := template.New("universalis_email_template").Parse(emailTemplate)
 	if err != nil {
 		return nil, err
