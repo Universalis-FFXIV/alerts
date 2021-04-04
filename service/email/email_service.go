@@ -9,17 +9,18 @@ import (
 	"github.com/mailgun/mailgun-go/v4"
 )
 
-type EmailService struct {
+type emailService struct {
 	client *mailgun.MailgunImpl
 }
 
+// New creates a new Mailgun-backed NotificationService.
 func New(domain string, key string) common.NotificationService {
 	client := mailgun.NewMailgun(domain, key)
-	email := &EmailService{client: client}
+	email := &emailService{client: client}
 	return email
 }
 
-func (e *EmailService) SendNotification(address string, notification *model.Notification) error {
+func (e *emailService) SendNotification(address string, notification *model.Notification) error {
 	sender := "notifications@universalis.app"
 	subject := "Alert triggered for " + notification.ItemName
 

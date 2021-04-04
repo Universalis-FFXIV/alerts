@@ -13,7 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type NotificationInfo struct {
+type notificationInfo struct {
 	TargetUser   string             `json:"targetUser"`
 	Notification model.Notification `json:"notification"`
 }
@@ -41,7 +41,7 @@ func main() {
 	for serviceName, service := range services {
 		router := app.Group("/" + serviceName)
 		router.Post("/send", func(ctx *fiber.Ctx) error {
-			ni := &NotificationInfo{}
+			ni := &notificationInfo{}
 			if err := json.Unmarshal(ctx.Body(), ni); err != nil {
 				log.Println(err)
 				return err
