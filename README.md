@@ -1,4 +1,7 @@
 # alerts
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9ab1040a9f9c43faaed6cc46925db82d)](https://app.codacy.com/gh/Universalis-FFXIV/alerts?utm_source=github.com&utm_medium=referral&utm_content=Universalis-FFXIV/alerts&utm_campaign=Badge_Grade_Settings)
+
 Alerts service for mogboard.
 
 ## Notification methods
