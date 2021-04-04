@@ -16,10 +16,16 @@ func New(token string) (common.NotificationService, error) {
 	}
 
 	d := &DiscordService{client: client}
+
+	if err = d.client.Open(); err != nil {
+		return nil, err
+	}
+
 	return d, nil
 }
 
 func (d *DiscordService) SendNotification(uid string, text string) error {
-	_, err := d.client.ChannelMessageSend(uid, text)
+	user, _ := d.client.UserChannelCreate(uid)
+	_, err := d.client.ChannelMessageSend(user.ID, text)
 	return err
 }

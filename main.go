@@ -9,7 +9,6 @@ import (
 
 	"github.com/Universalis-FFXIV/alerts/service/common"
 	"github.com/Universalis-FFXIV/alerts/service/discord"
-	"github.com/Universalis-FFXIV/alerts/service/email"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -28,11 +27,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	emailClient := email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
+	//emailClient := email.New("", os.Getenv("UNIVERSALIS_MAILGUN_KEY"))
 
 	services := map[string]common.NotificationService{
 		"discord": discordClient,
-		"email":   emailClient,
+		//"email":   emailClient,
 	}
 
 	// Configure router
