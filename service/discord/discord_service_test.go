@@ -9,6 +9,7 @@ import (
 	"github.com/Universalis-FFXIV/alerts/service/discord"
 )
 
+// TestSend tests the entire SendNotification method of the DiscordService.
 func TestSend(t *testing.T) {
 	discordClient, err := discord.New(os.Getenv("UNIVERSALIS_ALERTS_DISCORD_TOKEN"))
 	if err != nil {
