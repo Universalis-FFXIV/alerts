@@ -53,7 +53,7 @@ func (d *discordService) SendNotification(uid string, notification *model.Notifi
 	// Trim down the sent reasons since Discord embeds have a limit on size
 	eb := &embedBody{
 		Notification:   notification,
-		TrimmedReasons: notification.Reasons[:int(math.Min(14, float64(len(notification.Reasons))))],
+		TrimmedReasons: notification.Reasons[:int(math.Min(16, float64(len(notification.Reasons))))],
 	}
 	eb.TrimmedCount = len(notification.Reasons) - len(eb.TrimmedReasons)
 	eb.Trimmed = eb.TrimmedCount != 0
