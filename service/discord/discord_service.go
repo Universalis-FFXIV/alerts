@@ -14,6 +14,16 @@ import (
 //go:embed embed_template.md
 var embedTemplate string
 
+var embedAuthor *discordgo.MessageEmbedAuthor = &discordgo.MessageEmbedAuthor{
+	Name:    "Universalis Alert!",
+	IconURL: "https://cdn.discordapp.com/emojis/474543539771015168.png",
+}
+
+var embedFooter *discordgo.MessageEmbedFooter = &discordgo.MessageEmbedFooter{
+	Text:    "universalis.app",
+	IconURL: "https://universalis.app/favicon.png",
+}
+
 type discordService struct {
 	client *discordgo.Session
 	et     *template.Template
@@ -69,6 +79,11 @@ func (d *discordService) SendNotification(uid string, notification *model.Notifi
 		Title:       "Alert triggered for " + notification.ItemName,
 		Description: description.String(),
 		Color:       0xBD983A,
+		Footer:      embedFooter,
+		Author:      embedAuthor,
+		Thumbnail: &discordgo.MessageEmbedThumbnail{
+			URL: notification.ItemIcon,
+		},
 	}
 
 	_, err = d.client.ChannelMessageSendEmbed(user.ID, embed)

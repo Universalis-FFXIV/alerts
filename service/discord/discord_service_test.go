@@ -20,6 +20,7 @@ func TestSend(t *testing.T) {
 		TargetUser: os.Getenv("UNIALERTS_TEST_DISCORD_ID"),
 		Notification: model.Notification{
 			ItemName: "Purpure Bead",
+			ItemIcon: "https://xivapi.com/i/021000/021285.png",
 			PageURL:  "https://universalis.app/market/29959",
 			Reasons: []string{
 				"Prices_PricePerUnit < 9000",
