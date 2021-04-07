@@ -20,9 +20,8 @@ var embedAuthor *discordgo.MessageEmbedAuthor = &discordgo.MessageEmbedAuthor{
 }
 
 var embedFooter *discordgo.MessageEmbedFooter = &discordgo.MessageEmbedFooter{
-	Text:         "universalis.app",
-	IconURL:      "https://universalis.app/favicon.png",
-	ProxyIconURL: "https://universalis.app",
+	Text:    "universalis.app",
+	IconURL: "https://universalis.app/favicon.png",
 }
 
 type discordService struct {
